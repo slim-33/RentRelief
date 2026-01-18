@@ -26,8 +26,16 @@ const keyDetailPatterns = [
   { label: 'Security Deposit', pattern: /(?:security|damage)\s+deposit[:\s]+\$?([\d,]+(?:\.\d{2})?)/i, category: 'security_deposit' },
   { label: 'Lease Start Date', pattern: /(?:start|commencement|beginning)\s+date[:\s]+([A-Za-z]+\s+\d{1,2},?\s+\d{4}|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i, category: 'termination' },
   { label: 'Lease End Date', pattern: /(?:end|termination|expiry)\s+date[:\s]+([A-Za-z]+\s+\d{1,2},?\s+\d{4}|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i, category: 'termination' },
-  { label: 'Property Address', pattern: /(?:premises|property|address)[:\s]+([^\n]{10,100})/i, category: 'other' },
-  { label: 'Landlord Name', pattern: /(?:landlord|owner|lessor)[:\s]+([A-Za-z\s]{3,50})/i, category: 'other' },
+  {
+    label: 'Property Address',
+    pattern: /(?:property\s+address|address|premises)[:\s]+([^\r\n]+)/i,
+    category: 'other'
+  },
+  {
+    label: 'Landlord Name',
+    pattern: /(?:landlord|owner|lessor)(?:\s+name)?[:\s]+([^\r\n]+)/i,
+    category: 'other'
+  },
   { label: 'Notice Period', pattern: /(\d+)\s*(?:days?|months?)\s+(?:written\s+)?notice/i, category: 'termination' },
 ];
 

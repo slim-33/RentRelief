@@ -57,26 +57,44 @@ export function AnalysisResults({ results }: AnalysisResultsProps) {
       </Card>
 
       {/* Key Details */}
-      {keyDetails.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <FileText className="w-5 h-5" />
-              Key Details Extracted
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {keyDetails.map((detail, index) => (
-                <div key={index} className="flex justify-between p-3 bg-muted/50 rounded-lg">
-                  <span className="text-muted-foreground">{detail.label}</span>
-                  <span className="font-medium">{detail.value}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+      {(() => {
+        const detailMap = new Map(keyDetails.map(detail => [detail.label, detail.value]));
+        const expectedLabels = [
+          'Property Address',
+          'Landlord Name',
+          'Monthly Rent',
+          'Security Deposit',
+          'Lease Start Date',
+          'Lease End Date',
+          'Notice Period'
+        ];
+
+        const displayDetails = expectedLabels.map(label => ({
+          label,
+          value: detailMap.get(label) ?? 'Not listed'
+        }));
+
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <FileText className="w-5 h-5" />
+                Key Details Extracted
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {displayDetails.map((detail) => (
+                  <div key={detail.label} className="flex justify-between p-3 bg-muted/50 rounded-lg">
+                    <span className="text-muted-foreground">{detail.label}</span>
+                    <span className="font-medium">{detail.value}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })()}
 
       {/* Flagged Clauses - Malicious */}
       {maliciousClauses.length > 0 && (
