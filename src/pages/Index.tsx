@@ -34,7 +34,7 @@ const Index = () => {
         return;
       }
 
-      const results = analyzeContract(text);
+      const results = await analyzeContract(text);
       setAnalysisResults(results);
 
       setTimeout(() => {
@@ -43,7 +43,7 @@ const Index = () => {
 
       toast({
         title: 'Analysis Complete',
-        description: `Found ${results.flaggedClauses.length} notable clauses in your contract.`
+        description: `Found ${results.flaggedClauses.length} notable clauses using ${results.analysisMethod === 'gemini' ? 'AI analysis' : 'pattern matching'}.`
       });
     } catch (error) {
       console.error('Error processing file:', error);

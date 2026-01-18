@@ -1,4 +1,4 @@
-import { AlertTriangle, CheckCircle, Info, Shield, FileText, Lightbulb } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, Shield, FileText, Lightbulb, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -48,6 +48,31 @@ export function AnalysisResults({ results }: AnalysisResultsProps) {
                   {riskLevel.label}
                 </Badge>
               </div>
+            </div>
+            
+            {/* Analysis Method Badge */}
+            <div className="flex items-center gap-2 mt-4 flex-wrap">
+              {results.analysisMethod === 'gemini' && (
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                  <Sparkles className="w-3 h-3 mr-1" />
+                  AI-Powered Analysis
+                </Badge>
+              )}
+              {results.analysisMethod === 'keyword' && (
+                <Badge variant="secondary" className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">
+                  Pattern Matching
+                </Badge>
+              )}
+              {results.confidence && (
+                <Badge variant="outline" className="text-xs">
+                  Confidence: {results.confidence}%
+                </Badge>
+              )}
+              {results.processingTime && (
+                <span className="text-xs text-muted-foreground">
+                  Analyzed in {(results.processingTime / 1000).toFixed(1)}s
+                </span>
+              )}
             </div>
           </CardHeader>
         </div>

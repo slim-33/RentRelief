@@ -1,4 +1,5 @@
 import { bcRentalClauses, ClausePattern, categoryLabels } from '@/data/bcRentalClauses';
+import { analyzeContractWithGemini, GeminiError } from './geminiService';
 
 export interface AnalysisResult {
   summary: string;
@@ -6,6 +7,9 @@ export interface AnalysisResult {
   flaggedClauses: FlaggedClause[];
   overallRiskScore: number;
   recommendations: string[];
+  analysisMethod?: 'gemini' | 'keyword';
+  confidence?: number;
+  processingTime?: number;
 }
 
 export interface KeyDetail {
@@ -17,7 +21,8 @@ export interface KeyDetail {
 export interface FlaggedClause {
   clause: ClausePattern;
   matchedText: string;
-  position: number;
+  position?: number;
+  aiInsight?: string;
 }
 
 // Common patterns to extract key details
@@ -72,7 +77,37 @@ const cleanExtractedValue = (value: string) => {
   return cleaned;
 };
 
-export function analyzeContract(text: string): AnalysisResult {
+/**
+ * Main contract analysis function - uses Gemini AI with fallback to keyword matching
+ */
+export async function analyzeContract(text: string): Promise<AnalysisResult> {
+  const startTime = Date.now();
+  
+  try {
+    // Primary: Try Gemini AI analysis
+    const result = await analyzeContractWithGemini(text);
+    return {
+      ...result,
+      processingTime: Date.now() - startTime
+    };
+  } catch (error) {
+    // Log the error for debugging
+    console.error('Gemini analysis failed, falling back to keyword matching:', error);
+    
+    // Fallback: Use keyword matching
+    const result = analyzeContractWithKeywords(text);
+    return {
+      ...result,
+      analysisMethod: 'keyword',
+      processingTime: Date.now() - startTime
+    };
+  }
+}
+
+/**
+ * Keyword-based contract analysis (fallback method)
+ */
+export function analyzeContractWithKeywords(text: string): AnalysisResult {
   const normalizedText = text.toLowerCase();
   const flaggedClauses: FlaggedClause[] = [];
   

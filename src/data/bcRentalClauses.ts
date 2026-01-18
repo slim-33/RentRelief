@@ -19,7 +19,7 @@ export const bcRentalClauses: ClausePattern[] = [
     category: 'security_deposit',
     name: 'Excessive Security Deposit',
     description: 'Deposit exceeding half month\'s rent',
-    keywords: ['security deposit', 'damage deposit', 'first and last', 'two months', '1.5 months'],
+    keywords: ['first and last', 'two months', '1.5 months', 'one and a half months', 'double deposit'],
     isMalicious: true,
     severity: 'high',
     legalReference: 'BC RTA Section 19',
