@@ -6,18 +6,18 @@
       <stop offset="1" stop-color="#4FB5FB"/>
     </linearGradient>
   </defs>
-  <!-- House outline -->
-  <path d="M256 120L152 200V300H360V200L256 120Z" stroke="#2563EB" stroke-width="24" fill="white" stroke-linejoin="round"/>
+  <!-- House outline - centered and larger -->
+  <path d="M256 140L140 230V340H372V230L256 140Z" stroke="#2563EB" stroke-width="24" fill="white" stroke-linejoin="round"/>
   <!-- Chimney -->
-  <rect x="292" y="120" width="24" height="40" fill="#2563EB" rx="4"/>
-  <!-- Shield with cross -->
-  <path d="M256 190C256 190 220 195 220 220V260C220 285 256 300 256 300C256 300 292 285 292 260V220C292 195 256 190 256 190Z" fill="url(#shieldGradient)" stroke="#2563EB" stroke-width="8"/>
+  <rect x="300" y="140" width="24" height="40" fill="#2563EB" rx="4"/>
+  <!-- Shield with cross - centered -->
+  <path d="M256 210C256 210 216 216 216 244V290C216 320 256 338 256 338C256 338 296 320 296 290V244C296 216 256 210 256 210Z" fill="url(#shieldGradient)" stroke="#2563EB" stroke-width="8"/>
   <defs>
-    <linearGradient id="shieldGradient" x1="256" y1="190" x2="256" y2="300" gradientUnits="userSpaceOnUse">
+    <linearGradient id="shieldGradient" x1="256" y1="210" x2="256" y2="338" gradientUnits="userSpaceOnUse">
       <stop stop-color="#4FB5FB"/>
       <stop offset="1" stop-color="#2563EB"/>
     </linearGradient>
   </defs>
   <!-- Cross on shield -->
-  <path d="M256 215V275M236 245H276" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 235V305M226 270H286" stroke="white" stroke-width="10" stroke-linecap="round"/>
 </svg>
