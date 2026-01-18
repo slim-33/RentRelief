@@ -26,9 +26,6 @@ export function Header() {
           <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             How It Works
           </a>
-          <a href="#resources" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Resources
-          </a>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -59,13 +56,6 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               How It Works
-            </a>
-            <a
-              href="#resources"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Resources
             </a>
           </nav>
         </div>
