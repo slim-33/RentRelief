@@ -9,7 +9,7 @@ const steps = [
   },
   {
     icon: Search,
-    title: 'AI Analysis',
+    title: 'Contract Analysis',
     description: 'Our system scans for 20+ common problematic clauses specific to BC rental laws and the Residential Tenancy Act.'
   },
   {
