@@ -2,18 +2,18 @@
 
 An intelligent contract analysis tool for BC university students to identify problematic clauses in rental agreements before signing.
 
-## 🚀 Features
+## Features
 
-- **🤖 AI-Powered Analysis**: Uses Google's Gemini AI for deep semantic understanding of rental contracts
-- **⚖️ BC Law Compliance**: Checks contracts against BC Residential Tenancy Act regulations
-- **🔍 Smart Clause Detection**: Identifies illegal, unfair, and concerning contract terms
-- **📊 Risk Scoring**: Provides an overall risk assessment (0-100 scale)
-- **💡 Actionable Recommendations**: Offers specific advice based on flagged issues
-- **🔒 Privacy-First**: All processing happens in your browser (except AI API calls)
-- **📱 Responsive Design**: Works on desktop, tablet, and mobile devices
-- **⚡ Fast Analysis**: Results in 2-5 seconds with AI, instant fallback to pattern matching
+- **AI-Powered Analysis**: Uses Google's Gemini AI for deep semantic understanding of rental contracts
+- **BC Law Compliance**: Checks contracts against BC Residential Tenancy Act regulations
+- **Smart Clause Detection**: Identifies illegal, unfair, and concerning contract terms
+- **Risk Scoring**: Provides an overall risk assessment (0-100 scale)
+- **Actionable Recommendations**: Offers specific advice based on flagged issues
+- **Privacy-First**: All processing happens in your browser (except AI API calls)
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Fast Analysis**: Results in 2-5 seconds with AI, instant fallback to pattern matching
 
-## 🎯 What It Detects
+## What It Detects
 
 ### High-Risk Violations
 - Excessive security deposits (>0.5 months rent)
@@ -35,7 +35,7 @@ An intelligent contract analysis tool for BC university students to identify pro
 - Subletting policies
 - Pet restrictions (in strata)
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend**: React 18 + TypeScript + Vite
 - **UI Components**: shadcn/ui + Tailwind CSS
@@ -45,12 +45,12 @@ An intelligent contract analysis tool for BC university students to identify pro
 - **State Management**: React Hooks
 - **Icons**: Lucide React
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18+ and npm
 - Google Gemini API key ([Get one here](https://ai.google.dev/))
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
@@ -89,36 +89,7 @@ The application will be available at `http://localhost:5500`
 npm run build
 ```
 
-## 📁 Project Structure
-
-```
-RentRelief/
-├── src/
-│   ├── components/          # React components
-│   │   ├── ui/             # shadcn/ui components
-│   │   ├── AnalysisResults.tsx
-│   │   ├── FileUpload.tsx
-│   │   ├── Header.tsx
-│   │   └── ...
-│   ├── lib/                # Core logic
-│   │   ├── geminiService.ts      # Gemini AI integration
-│   │   ├── contractAnalyzer.ts   # Analysis orchestration
-│   │   ├── pdfParser.ts          # PDF text extraction
-│   │   └── utils.ts
-│   ├── data/               # Data and configurations
-│   │   └── bcRentalClauses.ts    # BC RTA clause patterns
-│   ├── pages/              # Page components
-│   │   ├── Index.tsx
-│   │   └── NotFound.tsx
-│   └── main.tsx            # Application entry point
-├── plans/                  # Architecture documentation
-│   ├── gemini-integration-plan.md
-│   └── implementation-checklist.md
-├── public/                 # Static assets
-└── package.json
-```
-
-## 🧠 How It Works
+## How It Works
 
 ### Analysis Flow
 
@@ -149,7 +120,7 @@ try {
 }
 ```
 
-## 🔑 Key Components
+## Key Components
 
 ### [`geminiService.ts`](src/lib/geminiService.ts)
 - Gemini API integration
@@ -171,7 +142,7 @@ try {
 - Flagged clauses accordion
 - Recommendations list
 
-## 🎨 UI Features
+## UI Features
 
 - **AI-Powered Badge**: Shows when analysis used Gemini AI
 - **Confidence Score**: Displays AI confidence level
@@ -180,14 +151,14 @@ try {
 - **Expandable Clauses**: Click to see detailed explanations
 - **Responsive Design**: Mobile-friendly interface
 
-## 🔒 Privacy & Security
+## Privacy & Security
 
 - **Client-Side Processing**: PDF parsing happens in browser
 - **API Security**: Gemini API key stored in environment variables
 - **No Data Storage**: Contracts are not saved or uploaded to servers
 - **HTTPS Required**: Use HTTPS in production for API calls
 
-## 💰 Cost Estimation
+## Cost Estimation
 
 Using Gemini 1.5 Flash:
 - **Per Analysis**: ~$0.0009 (less than 1 cent)
@@ -195,7 +166,7 @@ Using Gemini 1.5 Flash:
 - **1,000 analyses**: ~$0.90
 - **Free Tier**: 15 requests/minute included
 
-## 🧪 Testing
+## Testing
 
 ### Run Tests
 
@@ -212,7 +183,7 @@ A test contract with problematic clauses is included:
 
 Upload this file to see how the AI identifies multiple violations.
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### "Gemini API key not configured"
 - Ensure `.env` file exists with `VITE_GEMINI_API_KEY`
@@ -229,14 +200,14 @@ Upload this file to see how the AI identifies multiple violations.
 - Try converting to TXT format
 - Check file size (<10MB recommended)
 
-## 📚 Resources
+## Resources
 
 - [BC Residential Tenancy Act](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02078_01)
 - [BC Residential Tenancy Branch](https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies)
 - [Google Gemini API Docs](https://ai.google.dev/docs)
 - [shadcn/ui Documentation](https://ui.shadcn.com/)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 1. Fork the repository
@@ -244,21 +215,17 @@ Contributions are welcome! Please:
 3. Make your changes
 4. Submit a pull request
 
-## 📄 License
+## License
 
 This project is for educational purposes. Always consult with legal professionals for official advice.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This tool provides informational analysis only and does not constitute legal advice. For specific legal questions, consult:
 - BC Residential Tenancy Branch: 1-800-665-8779
 - A qualified lawyer or legal aid service
 - Your university's student legal services
 
-## 🎓 Built For
+## Built For
 
 BC University Students - helping you avoid bad leases and understand your rights!
-
----
-
-**Made with ❤️ for student renters in British Columbia**
