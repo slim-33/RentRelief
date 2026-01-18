@@ -29,7 +29,7 @@ export function HowItWorks() {
     <section id="how-it-works" className="py-20 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">How RentSafe BC Works</h2>
+          <h2 className="text-3xl font-bold mb-4">How RentRescue Works</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Understand your rental contract in minutes, not hours
           </p>

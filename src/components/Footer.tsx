@@ -9,7 +9,7 @@ export function Footer() {
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <Shield className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="font-bold">RentSafe BC</span>
+            <span className="font-bold">RentRescue</span>
           </div>
           
           <p className="text-sm text-muted-foreground max-w-md">
@@ -22,7 +22,7 @@ export function Footer() {
           </div>
           
           <p className="text-xs text-muted-foreground mt-4">
-            © {new Date().getFullYear()} RentSafe BC. This tool provides general information only 
+            © {new Date().getFullYear()} RentRescue. This tool provides general information only
             and does not constitute legal advice.
           </p>
         </div>
