@@ -6,16 +6,9 @@ export function Footer() {
       <div className="container">
         <div className="flex flex-col items-center justify-center gap-4 text-center">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <Shield className="w-4 h-4 text-primary-foreground" />
-            </div>
+            <img src="/logo.svg" alt="RentRescue Logo" className="w-8 h-8 rounded-lg" />
             <span className="font-bold">RentRescue</span>
           </div>
-          
-          <p className="text-sm text-muted-foreground max-w-md">
-            Helping BC university students understand their rental contracts and know their rights 
-            under the Residential Tenancy Act.
-          </p>
           
           <div className="flex items-center gap-1 text-sm text-muted-foreground">
             Made with <Heart className="w-4 h-4 text-red-500" /> for BC students

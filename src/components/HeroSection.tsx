@@ -10,11 +10,6 @@ export function HeroSection() {
     <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background py-20 sm:py-32">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
-            <Shield className="w-4 h-4" />
-            Free for BC University Students
-          </div>
-          
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
             Don't Sign a{' '}
             <span className="text-primary">Bad Lease</span>

@@ -1,0 +1,23 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="120" fill="url(#gradient)"/>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4FFBDF"/>
+      <stop offset="1" stop-color="#4FB5FB"/>
+    </linearGradient>
+  </defs>
+  <!-- House outline - centered and larger -->
+  <path d="M256 140L140 230V340H372V230L256 140Z" stroke="#2563EB" stroke-width="24" fill="white" stroke-linejoin="round"/>
+  <!-- Chimney -->
+  <rect x="300" y="140" width="24" height="40" fill="#2563EB" rx="4"/>
+  <!-- Shield with cross - centered -->
+  <path d="M256 210C256 210 216 216 216 244V290C216 320 256 338 256 338C256 338 296 320 296 290V244C296 216 256 210 256 210Z" fill="url(#shieldGradient)" stroke="#2563EB" stroke-width="8"/>
+  <defs>
+    <linearGradient id="shieldGradient" x1="256" y1="210" x2="256" y2="338" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4FB5FB"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <!-- Cross on shield -->
+  <path d="M256 235V305M226 270H286" stroke="white" stroke-width="10" stroke-linecap="round"/>
+</svg>
