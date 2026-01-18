@@ -10,6 +10,7 @@ An intelligent contract analysis tool for BC university students to identify pro
 - **Risk Scoring**: Provides an overall risk assessment (0-100 scale)
 - **Actionable Recommendations**: Offers specific advice based on flagged issues
 - **Privacy-First**: All processing happens in your browser (except AI API calls)
+- **Mobile-Friendly**: Compatibility with tablet and mobile phone
 
 ## What It Detects
 
