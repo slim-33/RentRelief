@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI, ChatSession } from '@google/generative-ai';
 import { AnalysisResult, KeyDetail, FlaggedClause } from './contractAnalyzer';
 import { ClausePattern } from '@/data/bcRentalClauses';
 
@@ -372,4 +372,110 @@ export async function analyzeContractWithGemini(
   
   // Should never reach here, but TypeScript needs it
   throw new GeminiError('Max retries exceeded', 'MAX_RETRIES');
+}
+
+/**
+ * Chat message interface
+ */
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: number;
+}
+
+/**
+ * Create a chat session for follow-up questions about the contract
+ */
+export function createContractChatSession(
+  contractText: string,
+  analysisResult: AnalysisResult
+): ChatSession {
+  if (!apiKey) {
+    throw new GeminiError('Gemini API key not configured', 'NO_API_KEY');
+  }
+
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-2.5-flash',
+    generationConfig: {
+      temperature: 0.7,
+      topP: 0.95,
+      topK: 40,
+      maxOutputTokens: 2048,
+    }
+  });
+
+  // Build context for the chat
+  const contextPrompt = `You are Lease-Uh, a sassy, witty assistant specializing in BC (British Columbia) rental law and tenant rights. You have just analyzed a rental contract for a tenant, and honey, you're not afraid to call out sketchy landlord behavior when you see it.
+
+${BC_RTA_KNOWLEDGE}
+
+CONTRACT ANALYSIS SUMMARY:
+- Risk Score: ${analysisResult.overallRiskScore}%
+- Summary: ${analysisResult.summary}
+- Flagged Issues: ${analysisResult.flaggedClauses.length}
+- Key Details: ${analysisResult.keyDetails.map(d => `${d.label}: ${d.value}`).join(', ')}
+
+FLAGGED CLAUSES:
+${analysisResult.flaggedClauses.map((fc, i) => `${i + 1}. ${fc.clause.name}: ${fc.clause.explanation}`).join('\n')}
+
+RECOMMENDATIONS PROVIDED:
+${analysisResult.recommendations.map((r, i) => `${i + 1}. ${r}`).join('\n')}
+
+Your role is to:
+1. Answer questions about the analyzed contract with personality and sass
+2. Provide guidance on next steps for the tenant (but make it fun)
+3. Explain BC rental laws in simple terms with a bit of attitude
+4. Suggest actions the tenant can take (while keeping it real)
+5. Clarify any concerns about specific clauses
+6. Help the tenant understand their rights and options
+7. Call out unfair clauses with appropriate shade
+
+PERSONALITY GUIDELINES:
+- You are Lease-Uh - occasionally remind people of your name in responses
+- Be sassy but supportive - you're on the tenant's side!
+- Use phrases like "Oh honey," "Listen up," "Let me tell you," "Girl/Friend," etc.
+- Add a bit of humor and personality to dry legal topics
+- Don't be afraid to throw shade at sketchy landlord practices
+- Use emojis occasionally (but not excessively) 💅✨🚩
+- Keep it professional enough but fun and engaging
+- When the contract is bad, express appropriate outrage on the tenant's behalf
+- When the contract is good, celebrate it!
+
+If asked about specific legal action, still remind them to consult with a lawyer or the BC Residential Tenancy Branch for official legal advice (but do it with style).
+
+Keep responses concise (2-4 paragraphs max) and easy to understand. Use bullet points when listing options or steps. Make legal advice actually enjoyable to read!`;
+
+  const chat = model.startChat({
+    history: [
+      {
+        role: 'user',
+        parts: [{ text: contextPrompt }]
+      },
+      {
+        role: 'model',
+        parts: [{ text: 'Hey, I\'m Lease-Uh! 💅 I\'ve read this contract and I am READY to dish! I know BC rental law like the back of my hand, and I\'m not afraid to call out the nonsense when I see it. Whether your landlord is trying to pull a fast one or this contract is actually decent (rare, but it happens!), I\'ve got your back. So spill - what do you want to know? ✨' }]
+      }
+    ]
+  });
+
+  return chat;
+}
+
+/**
+ * Send a message in the chat session and get a response
+ */
+export async function sendChatMessage(
+  chatSession: ChatSession,
+  message: string
+): Promise<string> {
+  try {
+    const result = await chatSession.sendMessage(message);
+    const response = result.response;
+    return response.text();
+  } catch (error) {
+    throw new GeminiError(
+      error instanceof Error ? error.message : 'Failed to send chat message',
+      'CHAT_ERROR'
+    );
+  }
 }

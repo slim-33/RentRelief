@@ -15,11 +15,13 @@ import { ArrowUp } from 'lucide-react';
 const Index = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [analysisResults, setAnalysisResults] = useState<AnalysisResult | null>(null);
+  const [contractText, setContractText] = useState<string>('');
   const { toast } = useToast();
 
   const handleFileSelect = async (file: File) => {
     setIsProcessing(true);
     setAnalysisResults(null);
+    setContractText('');
 
     try {
       const text = await extractTextFromFile(file);
@@ -36,6 +38,7 @@ const Index = () => {
 
       const results = await analyzeContract(text);
       setAnalysisResults(results);
+      setContractText(text);
 
       setTimeout(() => {
         document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
@@ -59,6 +62,7 @@ const Index = () => {
 
   const handleNewAnalysis = () => {
     setAnalysisResults(null);
+    setContractText('');
     document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -93,7 +97,7 @@ const Index = () => {
                 </Button>
               </div>
               
-              <AnalysisResults results={analysisResults} />
+              <AnalysisResults results={analysisResults} contractText={contractText} />
             </div>
           </section>
         )}

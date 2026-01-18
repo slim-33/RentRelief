@@ -6,12 +6,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { AnalysisResult } from '@/lib/contractAnalyzer';
 import { categoryLabels, severityColors } from '@/data/bcRentalClauses';
 import { cn } from '@/lib/utils';
+import { ContractChatbot } from './ContractChatbot';
 
 interface AnalysisResultsProps {
   results: AnalysisResult;
+  contractText: string;
 }
 
-export function AnalysisResults({ results }: AnalysisResultsProps) {
+export function AnalysisResults({ results, contractText }: AnalysisResultsProps) {
   const { summary, keyDetails, flaggedClauses, overallRiskScore, recommendations } = results;
   
   const maliciousClauses = flaggedClauses.filter(f => f.clause.isMalicious);
@@ -250,11 +252,16 @@ export function AnalysisResults({ results }: AnalysisResultsProps) {
 
       <Separator />
 
+      {/* Chatbot Section */}
+      <ContractChatbot contractText={contractText} analysisResult={results} />
+
+      <Separator />
+
       {/* Disclaimer */}
       <Card className="bg-muted/50">
         <CardContent className="py-4">
           <p className="text-sm text-muted-foreground text-center">
-            <strong>Disclaimer:</strong> This analysis is for informational purposes only and does not constitute legal advice. 
+            <strong>Disclaimer:</strong> This analysis is for informational purposes only and does not constitute legal advice.
             For specific legal questions, please consult with a lawyer or contact the BC Residential Tenancy Branch.
           </p>
         </CardContent>
