@@ -28,16 +28,49 @@ const keyDetailPatterns = [
   { label: 'Lease End Date', pattern: /(?:end|termination|expiry)\s+date[:\s]+([A-Za-z]+\s+\d{1,2},?\s+\d{4}|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i, category: 'termination' },
   {
     label: 'Property Address',
-    pattern: /(?:property\s+address|address|premises)[:\s]+([^\r\n]+)/i,
+    pattern: /(?:property\s+address|address|premises)[:\s]+(.+?)(?=(\s+\|\s+|\s+(?:landlord|tenant|email|phone|beginning of tenancy|security deposit|rent)\b|$))/i,
     category: 'other'
   },
   {
     label: 'Landlord Name',
-    pattern: /(?:landlord|owner|lessor)(?:\s+name)?[:\s]+([^\r\n]+)/i,
+    pattern: /(?:landlord|owner|lessor)(?:\s+name)?[:\s]+(.+?)(?=(\s+\|\s+|\s+(?:tenant|email|phone|address|premises|property|beginning of tenancy|security deposit|rent)\b|$))/i,
     category: 'other'
   },
   { label: 'Notice Period', pattern: /(\d+)\s*(?:days?|months?)\s+(?:written\s+)?notice/i, category: 'termination' },
 ];
+
+const cleanExtractedValue = (value: string) => {
+  let cleaned = value.replace(/\s+/g, ' ').trim();
+  cleaned = cleaned.replace(/^[\-\|:]+|[\-\|:]+$/g, '').trim();
+
+  const stopTokens = [
+    ' tenant',
+    ' email',
+    ' phone',
+    ' beginning of tenancy',
+    ' security deposit',
+    ' rent',
+    ' utilities',
+    ' repairs',
+    ' maintenance'
+  ];
+
+  const lower = cleaned.toLowerCase();
+  const stopIndex = stopTokens
+    .map(token => lower.indexOf(token))
+    .filter(index => index > 0)
+    .sort((a, b) => a - b)[0];
+
+  if (stopIndex) {
+    cleaned = cleaned.slice(0, stopIndex).trim();
+  }
+
+  if (cleaned.length > 120) {
+    cleaned = cleaned.slice(0, 120).trim();
+  }
+
+  return cleaned;
+};
 
 export function analyzeContract(text: string): AnalysisResult {
   const normalizedText = text.toLowerCase();
@@ -76,7 +109,7 @@ export function analyzeContract(text: string): AnalysisResult {
     if (match && match[1]) {
       keyDetails.push({
         label: pattern.label,
-        value: match[1].trim(),
+        value: cleanExtractedValue(match[1]),
         category: pattern.category
       });
     }
