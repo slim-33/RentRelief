@@ -34,7 +34,7 @@ const Index = () => {
         return;
       }
 
-      const results = await analyzeContract(text);
+      const results = analyzeContract(text);
       setAnalysisResults(results);
 
       setTimeout(() => {
@@ -74,7 +74,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Upload Your Rental Contract</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Your document is analyzed using AI to identify potential issues and extract key information.
+                Your document is processed locally in your browser. We don't store or upload your contract anywhere.
               </p>
             </div>
             
